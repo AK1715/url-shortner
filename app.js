@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const path = require('path');
 const { connectToMongoDB } = require('./conntect');
@@ -7,9 +8,9 @@ const staticRouter = require("./routes/staticRouter");
 const URL = require('./models/url'); 
 
 const app = express();
-const PORT = 8001;
+const PORT = process.env.PORT || 8001;
 
-connectToMongoDB('mongodb+srv://url_shotner_node:url_shotner_node@cluster0.vjbh4pd.mongodb.net/?appName=Cluster0').then(console.log("mongoDB connected"));
+connectToMongoDB(process.env.MONGO_URL).then(console.log("mongoDB connected"));
 
 app.set("view engine", "ejs")
 app.set("views", path.resolve("./views"))
